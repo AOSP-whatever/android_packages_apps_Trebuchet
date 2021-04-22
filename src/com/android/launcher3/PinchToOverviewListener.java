@@ -65,17 +65,12 @@ public class PinchToOverviewListener extends ScaleGestureDetector.SimpleOnScaleG
     private PinchThresholdManager mThresholdManager;
     private PinchAnimationManager mAnimationManager;
 
-<<<<<<< HEAD
     private GestureDetector mGestureDetector;
-=======
-    private GestureDetector mGestureListener;
->>>>>>> 4c76f9bbe... Launcher3: double tap on home screen to turn off screen
 
     public PinchToOverviewListener(Launcher launcher) {
         SharedPreferences prefs = Utilities.getPrefs(launcher.getApplicationContext());
 
         mLauncher = launcher;
-<<<<<<< HEAD
         mPinchDetector = new ScaleGestureDetector(launcher, this);
         mGestureDetector = new GestureDetector(launcher,
                 new GestureDetector.SimpleOnGestureListener() {
@@ -83,29 +78,14 @@ public class PinchToOverviewListener extends ScaleGestureDetector.SimpleOnScaleG
             public boolean onFling(MotionEvent e1, MotionEvent e2, float vX, float vy) {
                 if (prefs.getBoolean(PREF_STATUSBAR_EXPAND, true) && e1.getY() < e2.getY()) {
                     expandStatusBar(launcher);
-=======
-        mPinchDetector = new ScaleGestureDetector(mContext, this);
-        mGestureListener =
-                new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
+                }
+                return true;
+            }
             @Override
             public boolean onDoubleTap(MotionEvent event) {
                 final PowerManager pm = (PowerManager) mContext.getSystemService(
                         Context.POWER_SERVICE);
                 pm.goToSleep(event.getEventTime());
-                return true;
-            }
-            @Override
-            public boolean onFling(MotionEvent e1, MotionEvent e2,
-                    float velocityX, float velocityY) {
-                if (e1.getY() < e2.getY()) {
-                    final StatusBarManager mStatusBar =
-                            (StatusBarManager) mContext.getSystemService(
-                            Context.STATUS_BAR_SERVICE);
-                    mStatusBar.expandNotificationsPanel();
-                } else if (e1.getY() > e2.getY()) {
-                    mLauncher.showAppsView(true, false, false);
->>>>>>> 4c76f9bbe... Launcher3: double tap on home screen to turn off screen
-                }
                 return true;
             }
         });
